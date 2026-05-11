@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Desenho Mágico | Ferramenta Criativa</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #0f172a;
+            --container-bg: rgba(30, 41, 59, 0.7);
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --primary: #6366f1;
+            --primary-hover: #4f46e5;
+            --danger: #ef4444;
+            --danger-hover: #dc2626;
+            --border: rgba(255, 255, 255, 0.1);
+            --glass-border: 1px solid rgba(255, 255, 255, 0.05);
+            --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%);
+            color: var(--text-main);
+            min-height: 100vh;
+            line-height: 1.6;
+            padding: 40px 20px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .wrapper {
+            max-width: 1000px;
+            width: 100%;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .header h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            background: linear-gradient(to right, #818cf8, #c084fc);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .card {
+            background: var(--container-bg);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: var(--glass-border);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: var(--glass-shadow);
+            margin-bottom: 30px;
+        }
+
+        .demo-container {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .canvas-wrapper {
+            position: relative;
+            width: 100%;
+            background: #ffffff;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: inset 0 2px 10px rgba(0,0,0,0.1);
+            border: 2px solid transparent;
+            transition: border-color 0.3s ease;
+        }
+        
+        .canvas-wrapper:hover {
+            border-color: var(--primary);
+        }
+
+        canvas {
+            display: block;
+            width: 100%;
+            cursor: crosshair;
+        }
+
+        .toolbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(0, 0, 0, 0.2);
+            padding: 15px 20px;
+            border-radius: 12px;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .tools-group {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .tool-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+
+        .tool-item input[type="color"] {
+            -webkit-appearance: none;
+            border: none;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            cursor: pointer;
+            padding: 0;
+            background: none;
+        }
+        .tool-item input[type="color"]::-webkit-color-swatch-wrapper {
+            padding: 0;
+        }
+        .tool-item input[type="color"]::-webkit-color-swatch {
+            border: 2px solid var(--border);
+            border-radius: 50%;
+        }
+
+        .tool-item input[type="range"] {
+            accent-color: var(--primary);
+            cursor: pointer;
+        }
+
+        .data-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        @media (max-width: 768px) {
+            .data-section {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .input-group {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .input-group label {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--text-main);
+        }
+
+        textarea {
+            width: 100%;
+            height: 100px;
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            color: var(--text-main);
+            font-family: 'Inter', monospace;
+            padding: 12px;
+            resize: vertical;
+            transition: all 0.3s ease;
+        }
+
+        textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.2);
+        }
+
+        .buttons {
+            display: flex;
+            gap: 15px;
+            margin-top: 10px;
+        }
+
+        button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            flex: 1;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            color: white;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3);
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-hover);
+            transform: translateY(-2px);
+        }
+
+        .btn-danger {
+            background: var(--danger);
+            box-shadow: 0 4px 15px rgba(239, 68, 68, 0.3);
+        }
+
+        .btn-danger:hover {
+            background: var(--danger-hover);
+            transform: translateY(-2px);
+        }
+
+        .info-pill {
+            background: rgba(99, 102, 241, 0.1);
+            color: #818cf8;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            display: inline-block;
+            margin-bottom: 20px;
+            border: 1px solid rgba(99, 102, 241, 0.2);
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="wrapper">
+        <div class="header">
+            <span class="info-pill">✨ Versão 2.0 Aprimorada</span>
+            <h1>Desenho Mágico</h1>
+            <p>Uma biblioteca Vanilla JS super leve para desenhar em Canvas e exportar os traços como coordenadas matemáticas via Base64.</p>
+        </div>
+
+        <div class="card demo-container">
+            
+            <div class="toolbar">
+                <div class="tools-group">
+                    <div class="tool-item">
+                        <label for="colorPicker">Cor do Traço</label>
+                        <input type="color" id="colorPicker" value="#000000">
+                    </div>
+                    <div class="tool-item">
+                        <label for="lineWidth">Espessura</label>
+                        <input type="range" id="lineWidth" min="1" max="20" value="3">
+                    </div>
+                </div>
+                <div class="tool-item">
+                    <button id="btnExportar" class="btn-primary" style="padding: 8px 15px; font-size: 0.85rem; box-shadow: none; min-width: 150px; flex: unset;">
+                        <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg>
+                        Exportar Código
+                    </button>
+                </div>
+            </div>
+
+            <div class="canvas-wrapper">
+                <canvas id="telaDemo" width="900" height="400"></canvas>
+            </div>
+            
+            <div class="data-section">
+                <div class="input-group">
+                    <label>Código de Exportação (Base64):</label>
+                    <textarea id="boxGerado" readonly placeholder="O código do seu desenho aparecerá aqui ao clicar em Exportar Código..."></textarea>
+                </div>
+                
+                <div class="input-group">
+                    <label>Simulador de Importação:</label>
+                    <textarea id="boxEntrada" placeholder="Cole um código aqui e clique em Importar..."></textarea>
+                </div>
+            </div>
+
+            <div class="buttons">
+                <button id="btnImportar" class="btn-primary">
+                    <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"></path></svg>
+                    Importar Desenho
+                </button>
+                <button id="btnLimpar" class="btn-danger">
+                    <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
+                    Limpar Canvas
+                </button>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Importando a nossa biblioteca local -->
+    <script src="desenho-magico.js"></script>
+    
+    <!-- Importando a lógica da nossa interface (botões e controles) -->
+    <script src="app.js"></script>
+
+    <!-- Footer arrastável do Davicjc --> 
+    <script src="https://cdn.jsdelivr.net/gh/davicjc/FooterDavicjc@main/footer_cjc.js"></script>
+</body>
+</html>

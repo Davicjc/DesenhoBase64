@@ -1,4 +1,22 @@
-# 🎨 Desenho Mágico (Vanilla JS)
+<p align="center">
+  <img src=".github/readme/banner.png" alt="DesenhoBase64" width="100%">
+</p>
+
+<p align="center">
+  <img alt="👤 Projeto pessoal" src="https://img.shields.io/badge/%F0%9F%91%A4_Projeto_pessoal-6E40C9?style=for-the-badge">
+  <a href="https://davicjc.github.io/DesenhoBase64/"><img alt="🌐 Ver o site" src="https://img.shields.io/badge/%F0%9F%8C%90_Ver_o_site-1DB954?style=for-the-badge"></a>
+  <img alt="HTML5" src="https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white">
+  <img alt="JavaScript" src="https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=white">
+</p>
+
+<p align="center">Desenho Mágico: biblioteca JavaScript leve, sem dependências, para desenhar no canvas e exportar em Base64 — assinaturas, lousas e rabiscos.</p>
+
+
+<p align="center">
+  <img src=".github/readme/preview.png" alt="Prévia de DesenhoBase64 no computador e no celular" width="100%">
+</p>
+
+---
 
 [![Vanilla JS](https://img.shields.io/badge/Vanilla-JS-f7df1e?style=for-the-badge&logo=javascript&logoColor=black)]()
 [![Canvas HTML5](https://img.shields.io/badge/HTML5-Canvas-E34F26?style=for-the-badge&logo=html5&logoColor=white)]()
@@ -82,3 +100,7 @@ meuDesenho.ctx.lineWidth = 10; // Aplica ao Canvas
 ## 📜 Licença
 
 Totalmente Open Source. Sinta-se livre para usar, modificar e incorporar em projetos comerciais, pessoais ou de estudos!
+
+---
+
+<p align="center">Feito por <a href="https://github.com/Davicjc">Davi Castro</a> · <a href="https://davicjc.com">davicjc.com</a></p>

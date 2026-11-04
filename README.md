@@ -99,7 +99,7 @@ meuDesenho.ctx.lineWidth = 10; // Aplica ao Canvas
 
 ## 📜 Licença
 
-Licença MIT — veja [LICENSE](LICENSE). Pode usar, modificar e incorporar em projetos comerciais, pessoais ou de estudo.
+Licença MIT com crédito de autoria obrigatório — veja [LICENSE](LICENSE). Pode usar, modificar e incorporar em projetos comerciais, pessoais ou de estudo, mantendo o crédito visível.
 
 ---
 

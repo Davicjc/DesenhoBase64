@@ -99,7 +99,7 @@ meuDesenho.ctx.lineWidth = 10; // Aplica ao Canvas
 
 ## 📜 Licença
 
-Totalmente Open Source. Sinta-se livre para usar, modificar e incorporar em projetos comerciais, pessoais ou de estudos!
+Licença MIT — veja [LICENSE](LICENSE). Pode usar, modificar e incorporar em projetos comerciais, pessoais ou de estudo.
 
 ---
 
